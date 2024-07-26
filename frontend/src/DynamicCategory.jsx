@@ -7,6 +7,7 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import './DynamicCategory.css'
 
 const DynamicCategory = React.memo(({ datas, subCategories, category }) => {
   console.log("props", datas);
@@ -146,11 +147,12 @@ const DynamicCategory = React.memo(({ datas, subCategories, category }) => {
           {Array.isArray(data) &&
             data.map((item) => (
               <div className="col-5" key={item._id}>
-                <Card className="shadow-lg">
+                <Card className="shadow-lg overflow-hidden">
                   <Card.Img
                     variant="top"
                     src={`http://localhost:8080/public/${item.image}`}
                     height={"350px"}
+                    className="image"
                   />
                   <hr className="m-0" />
                   <Card.Body className="d-flex flex-column gap-2">

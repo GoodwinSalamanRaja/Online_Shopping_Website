@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import './AllProducts.css'
 
 function AllProducts() {
   const [products, setProducts] = useState();
@@ -73,11 +74,12 @@ function AllProducts() {
           {Array.isArray(products) &&
             products.map((data) => (
               <div className="col-5">
-                <Card className="shadow-lg">
+                <Card className="shadow-lg overflow-hidden">
                   <Card.Img
                     variant="top"
                     src={`http://localhost:8080/public/${data.image}`}
                     height={"350px"}
+                    className="image"
                   />
                   <hr className="m-0" />
                   <Card.Body className="d-flex flex-column gap-2">

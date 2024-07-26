@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import WebMetamask from "./WebMetamask";
 import Spinner from "react-bootstrap/Spinner";
 
-function Cart({length}) {
+function Cart({ length }) {
   const storedData = localStorage.getItem("userDetails");
 
   const parsedData = JSON.parse(storedData);
@@ -31,12 +31,12 @@ function Cart({length}) {
       });
   }, [parsedData.userId, parsedData.token]);
 
-  const [count,setCount] = useState()
+  const [count, setCount] = useState();
 
   useEffect(() => {
-    setCount(length)
-    console.log("cartlength",length);
-  },[length])
+    setCount(length);
+    console.log("cartlength", length);
+  }, [length]);
 
   const [cartLength, setCartLength] = useState();
 
@@ -79,7 +79,7 @@ function Cart({length}) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/cart/getById/${parsedData.userId}`,{
+      .get(`http://localhost:8080/cart/getById/${parsedData.userId}`, {
         headers: { Authorization: parsedData.token },
       })
       .then((response) => {
@@ -93,7 +93,7 @@ function Cart({length}) {
 
   function handleIncUpdate(id) {
     axios
-      .put(`http://localhost:8080/cart/updateInc/${id}`,"",{
+      .put(`http://localhost:8080/cart/updateInc/${id}`, "", {
         headers: { Authorization: parsedData.token },
       })
       .then((response) => {
@@ -117,7 +117,7 @@ function Cart({length}) {
 
   function handleDecUpdate(id) {
     axios
-      .put(`http://localhost:8080/cart/updateDec/${id}`,"",{
+      .put(`http://localhost:8080/cart/updateDec/${id}`, "", {
         headers: { Authorization: parsedData.token },
       })
       .then((response) => {
@@ -179,14 +179,16 @@ function Cart({length}) {
     setLoader(true);
     try {
       await contractInstance.methods
-        .transfer("0x36737B0a07943b751C672359F72D686bcD866e8b", amount)
+        .transfer("0x85a56F27F3267d59eDb260B50d0b05647E0436E6", amount)
         .send({ from: accounts })
         .then(async (res) => {
           console.log(res);
           setLoader(false);
           toast.success("Payment successfull");
           const response = await axios.put(
-            `http://localhost:8080/cart/updateStatus/${id}`,"",{headers:{Authorization:parsedData.token}}
+            `http://localhost:8080/cart/updateStatus/${id}`,
+            "",
+            { headers: { Authorization: parsedData.token } }
           );
           if (response.status === 200) {
             setProducts(products.filter((data) => data._id !== id));
@@ -219,7 +221,7 @@ function Cart({length}) {
       {console.log(length, "userData")}
       {cartLength >= 0 && userData && (
         <div>
-          <NavBar userData={userData} length={count || cartLength}/>
+          <NavBar userData={userData} length={count || cartLength} />
         </div>
       )}
       {cartLength === 0 && (
@@ -235,19 +237,21 @@ function Cart({length}) {
         </div>
       )}
       {cartLength >= 1 && (
-        <div className="container-fluid mt-5">
-          <div className="row justify-content-center mt-5">
+        <div className="container mt-5">
+          <div className="row justify-content-center mt-5 pt-4">
             {Array.isArray(products) &&
               products.map((data) => (
-                <div className="col-4 mt-5">
-                  <Card className="shadow-lg">
-                    <Card.Img
-                      variant="top"
-                      src={`http://localhost:8080/public/${data.image}`}
-                      height={"350px"}
-                    />
-                    <hr className="m-0" />
-                    <Card.Body className="d-flex flex-column gap-2">
+                <div className="col-12 mt-5">
+                  <div className="row align-items-center shadow-lg border border-2">
+                    <div className="col border-end border-3 overflow-hidden">
+                      <Card.Img
+                        src={`http://localhost:8080/public/${data.image}`}
+                        height={"400px"}
+                        className="image"
+                      />
+                    </div>
+                    {/* <hr className="m-0" /> */}
+                    <div className="col d-flex flex-column gap-3 px-4">
                       <div className="d-flex gap-1">
                         <span>Name : </span>
                         <span className="fw-bold">{data.name}</span>
@@ -264,7 +268,7 @@ function Cart({length}) {
                         <div>
                           <span className="fw-bold">Quantity:</span>
                         </div>
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                           <button
                             class="btn btn-outline-danger bi bi-dash-lg"
                             type="button"
@@ -311,8 +315,8 @@ function Cart({length}) {
                           Proceed to Buy
                         </Button>
                       </div>
-                    </Card.Body>
-                  </Card>
+                    </div>
+                  </div>
                 </div>
               ))}
           </div>
