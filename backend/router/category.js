@@ -1,0 +1,21 @@
+const express = require("express")
+const router = express.Router()
+const categoryController = require("../controller/category")
+const verifyTokenAdmin = require("../middleware/verifyTokenAdmin")
+const verifyTokenUser = require("../middleware/verifyTokenUser")
+
+router.post("/set/:category",verifyTokenAdmin,categoryController.insert)
+router.get("/get",verifyTokenAdmin,categoryController.list)
+router.get("/getByUser",verifyTokenUser,categoryController.list)
+router.get("/getById/:id",verifyTokenAdmin,categoryController.findById)
+router.get("/getByCategoryAdmin/:category",verifyTokenAdmin,categoryController.findByCategory)
+router.get("/getByCategory/:category",verifyTokenUser,categoryController.findByCategory)
+router.get("/searchByCategory/:name",verifyTokenAdmin,categoryController.searchByCategory)
+router.get("/searchByCategoryAndSubCategory/:name",verifyTokenAdmin,categoryController.searchByCategoryAndSubCategory)
+router.put("/update/:id/:category",verifyTokenAdmin,categoryController.update)
+router.put("/setToCategory/:category/:subCategory",verifyTokenAdmin,categoryController.setSubCategoryToCategory)
+router.get("/getWithSubCategory",verifyTokenAdmin,categoryController.listWithSubCategory)
+router.get("/getByIdWithSubCategory/:id/:name",verifyTokenAdmin,categoryController.findByIdWithSubCategory)
+router.put("/updateWithSubCategory/:categoryId/:subCategoryId/:category/:subCategory",verifyTokenAdmin,categoryController.updateWithSubCategory)
+
+module.exports = router

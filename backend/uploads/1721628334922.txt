@@ -1,0 +1,13 @@
+Admin panel:
+
+Category / sub category:
+
+validation
+
+Product:
+
+qty - remove float validation
+image validation
+
+User:
+ remove password field

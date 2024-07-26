@@ -1,0 +1,23 @@
+const express = require("express")
+const router = express.Router()
+const userController = require("../controller/user")
+const verifyTokenAdmin = require("../middleware/verifyTokenAdmin")
+const verifyTokenUser = require("../middleware/verifyTokenUser")
+
+router.post("/set",userController.insert)
+router.post("/check",userController.check)
+router.get("/forgot/:email",userController.forgotPassword)
+router.get("/verify/:email/:otp",userController.verify)
+router.put("/updatePassword/:email/:password",userController.updatePassword)
+router.get("/getByIdForUser/:id",verifyTokenUser,userController.getByIdForUser)
+router.get("/getByIdForAdmin/:id",verifyTokenAdmin,userController.getByIdForAdmin)
+router.put("/updateByUser/:id",verifyTokenUser,userController.updateByUser)
+router.put("/updateByAdmin/:id",verifyTokenAdmin,userController.updateByAdmin)
+router.delete("/deleteByUser/:id",verifyTokenUser,userController.deleteByUser)
+router.delete("/deleteByAdmin/:id",verifyTokenAdmin,userController.deleteByAdmin)
+router.get("/list",verifyTokenAdmin,userController.list)
+router.get("/searchByname/:name",verifyTokenAdmin,userController.searchByName)
+router.get("/findByPage/:page",verifyTokenAdmin,userController.findByPage)
+router.get("/findBySize/:size",verifyTokenAdmin,userController.findBySize)
+
+module.exports = router
