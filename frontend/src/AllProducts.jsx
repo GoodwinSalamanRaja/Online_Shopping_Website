@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import './AllProducts.css'
+import "./AllProducts.css";
 
 function AllProducts() {
   const [products, setProducts] = useState();
   const storedData = localStorage.getItem("userDetails");
   const parsedData = JSON.parse(storedData);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:8080/product/get", {
@@ -48,11 +48,15 @@ function AllProducts() {
 
   function handleCart(data) {
     axios
-      .post(`http://localhost:8080/cart/set/${data._id}/${parsedData.userId}`, data,{headers: { Authorization: parsedData.token }})
+      .post(
+        `http://localhost:8080/cart/set/${data._id}/${parsedData.userId}`,
+        data,
+        { headers: { Authorization: parsedData.token } }
+      )
       .then((response) => {
         console.log("cart", response.data);
-        toast.success("Product added to cart successfully")
-        navigate("/cart")
+        toast.success("Product added to cart successfully");
+        navigate("/cart");
       })
       .catch((error) => {
         console.log(error);
@@ -75,12 +79,14 @@ function AllProducts() {
             products.map((data) => (
               <div className="col-5">
                 <Card className="shadow-lg overflow-hidden">
-                  <Card.Img
-                    variant="top"
-                    src={`http://localhost:8080/public/${data.image}`}
-                    height={"350px"}
-                    className="image"
-                  />
+                  <div className="overflow-hidden">
+                    <Card.Img
+                      variant="top"
+                      src={`http://localhost:8080/public/${data.image}`}
+                      height={"350px"}
+                      className="image"
+                    />
+                  </div>
                   <hr className="m-0" />
                   <Card.Body className="d-flex flex-column gap-2">
                     <div className="d-flex gap-1">
