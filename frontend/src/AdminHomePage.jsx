@@ -40,14 +40,14 @@ function AdminHomePage() {
   const [user, setUser] = useState(false);
   const [order,setOrder] = useState(false)
 
-  const [data, setData] = useState();
+  const [data, setData] = useState({username:"",password:""});
   function getDetails(id) {
     console.log(id);
     axios
       .get(`http://localhost:8080/admin/get/${id}`,{headers:{Authorization:parsedData.token}})
       .then((response) => {
-        console.log(response.data);
-        setData({ username: response.data, password: null });
+        console.log(response.data,"response");
+        setData({ username: response.data, password: "" });
         handleShowModal();
       })
       .catch((error) => {
@@ -229,12 +229,14 @@ function AdminHomePage() {
                             />
                             <label for="floatingInput">Username</label>
                           </div>
+                          {console.log(data.password)}
                           <div class="form-floating mb-3">
                             <input
                               type="password"
                               class="form-control"
                               id="floatingPassword"
                               placeholder="Password"
+                              value={data.password}
                               onChange={(e) =>
                                 setData({ ...data, password: e.target.value })
                               }
