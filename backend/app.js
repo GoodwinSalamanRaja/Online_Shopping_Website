@@ -57,7 +57,8 @@ app.use("/category", require("./router/category"));
 app.use("/cart", require("./router/cart"));
 
 const mongoose = require("mongoose");
-const mongoDbUrl = "mongodb://localhost:27017/demo";
+// const mongoDbUrl = "mongodb://localhost:27017/demo";
+const mongoDbUrl = "mongodb+srv://goodwinmetadiac:MN3oSUCHWV9V37fe@cluster0.43h2wsa.mongodb.net/";
 mongoose
   .connect(mongoDbUrl)
   .then(() => {
