@@ -10,19 +10,19 @@ function AdminManageOrders() {
 
   const [products, setProducts] = useState();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/cart/get", {
-        headers: { Authorization: parsedData.token },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8080/cart/get", {
+  //       headers: { Authorization: parsedData.token },
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setProducts(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const [userData, setUserData] = useState();
 
@@ -35,12 +35,15 @@ function AdminManageOrders() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/cart/search/${encodeURIComponent(name || " ")}`, {
-        headers: { Authorization: parsedData.token },
-      })
+      .get(
+        `http://localhost:8080/cart/search/${encodeURIComponent(name || " ")}`,
+        {
+          headers: { Authorization: parsedData.token },
+        }
+      )
       .then((response) => {
         console.log(response.data);
-        setProducts(response.data);
+        setProducts(response.data.reverse());
       })
       .catch((error) => {
         console.log(error);
@@ -166,45 +169,39 @@ function AdminManageOrders() {
                         >
                           View Buyer Details
                         </Button>
-                        {userData && (
-                          <Modal show={show} onHide={handleClose}>
-                            <Modal.Header closeButton>
-                              <Modal.Title className="fw-bold">
-                                Buyer Details
-                              </Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                              <div className="d-flex flex-column gap-1">
-                                <div className="d-flex gap-1">
-                                  <span>Name :</span>
-                                  <span className="fw-bold">
-                                    {userData.username}
-                                  </span>
-                                </div>
-                                <div className="d-flex gap-1">
-                                  <span>Email :</span>
-                                  <span className="fw-bold">
-                                    {userData.email}
-                                  </span>
-                                </div>
-                                <div className="d-flex gap-1">
-                                  <span>Contact No :</span>
-                                  <span className="fw-bold">
-                                    {userData.mobile}
-                                  </span>
-                                </div>
-                              </div>
-                            </Modal.Body>
-                            <Modal.Footer>
-                              <Button variant="secondary" onClick={handleClose}>
-                                Close
-                              </Button>
-                            </Modal.Footer>
-                          </Modal>
-                        )}
                       </td>
                     </tr>
                   ))}
+                {userData && (
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title className="fw-bold">
+                        Buyer Details
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <div className="d-flex flex-column gap-1">
+                        <div className="d-flex gap-1">
+                          <span>Name :</span>
+                          <span className="fw-bold">{userData.username}</span>
+                        </div>
+                        <div className="d-flex gap-1">
+                          <span>Email :</span>
+                          <span className="fw-bold">{userData.email}</span>
+                        </div>
+                        <div className="d-flex gap-1">
+                          <span>Contact No :</span>
+                          <span className="fw-bold">{userData.mobile}</span>
+                        </div>
+                      </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                )}
               </tbody>
             </table>
           </div>

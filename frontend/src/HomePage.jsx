@@ -137,14 +137,17 @@ function HomePage({length}) {
         style={{ backgroundColor: "rgb(208,209,211)" }}
       >
         <div className="row">
-          <div className="col-2 p-0" style={{ height: "100vh" }}>
+          <div className="col-2 p-0">
             <div
               style={{
                 width: "14rem",
                 position: "fixed",
                 top: "14%",
                 backgroundColor: "rgb(208,209,211)",
+                height:'100vh',
+                overflowY:"auto"
               }}
+              className="custom-scroll"
             >
               <div>
                 <h4 className="fw-bold text-center p-2">Categories</h4>

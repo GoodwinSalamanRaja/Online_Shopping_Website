@@ -152,14 +152,15 @@ exports.getByIdForAdmin = (req, res) => {
     });
 };
 
-exports.updateByUser = (req, res) => {
+exports.updateByUser = async (req, res) => {
   console.log(req.body, req.params.id);
+  const hashedPassword = await bcrypt.hash(req.body.password,10)
   users
     .findByIdAndUpdate(
       req.params.id,
       {
         username: req.body.username,
-        password: req.body.password,
+        password: hashedPassword,
         email: req.body.email,
         mobile: req.body.mobile,
       },

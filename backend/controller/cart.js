@@ -256,22 +256,24 @@ exports.search = async (req, res) => {
           res.status(401).send(e);
         });
     } else {
+      console.log("search");
       carts
         .find()
         .populate("userId")
         .then((data) => {
-          console.log(data);
+          // console.log(data,"search");
           let filteredUsername = data.filter(
             (item) =>
               item.userId.username.match(name) ||
               item.userId.email.match(name) ||
               item.userId.mobile.match(name)
           );
-          console.log(filteredUsername, "user");
+          // console.log(filteredUsername, "user");
           res.status(200).send(filteredUsername);
         })
         .catch((e) => {
-          res.status(401).send(e);
+          console.log(e);
+          res.status(404).send(e);
         });
     }
   }

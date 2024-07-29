@@ -43,17 +43,18 @@ function AdminManageProducts() {
   const handleShowAdd = () => setShowAdd(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/product/list", {
-        headers: { Authorization: parsedData.token },
-      })
-      .then((response) => {
-        console.log("products", response.data);
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get("http://localhost:8080/product/list", {
+    //     headers: { Authorization: parsedData.token },
+    //   })
+    //   .then((response) => {
+    //     console.log("products", response.data);
+    //     console.log(response.data.slice().reverse());
+    //     setProducts(response.data.slice().reverse());
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
     axios
       .get("http://localhost:8080/category/get", {
@@ -65,9 +66,9 @@ function AdminManageProducts() {
       })
       .catch((error) => {
         console.log(error);
-      });
-  }, []);
-
+      });  
+  }, []);  
+  
   useEffect(() => {
     console.log("category", category);
     axios
@@ -135,7 +136,7 @@ function AdminManageProducts() {
           console.log("products", response.data);
           handleCloseAdd();
           toast.success("Product added successfully");
-          setProducts([...products, response.data]);
+          setProducts([response.data,...products]);
         })
         .catch((error) => {
           console.log(error);
@@ -194,7 +195,7 @@ function AdminManageProducts() {
         setProducts(
           products.map((product) => {
             console.log(product);
-            if (product._id == id) {
+            if (product._id === id) {
               return response.data;
             } else {
               return product;
@@ -221,7 +222,7 @@ function AdminManageProducts() {
       )
       .then((response) => {
         console.log("search Product", response.data);
-        setProducts(response.data);
+        setProducts(response.data.reverse());
       })
       .catch((error) => {
         console.log(error);

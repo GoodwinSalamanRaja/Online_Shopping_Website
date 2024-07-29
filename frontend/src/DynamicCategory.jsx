@@ -151,7 +151,7 @@ const DynamicCategory = React.memo(({ datas, subCategories, category }) => {
                   <div className="overflow-hidden">
                     <Card.Img
                       variant="top"
-                      src={`http://localhost:8080/public/${data.image}`}
+                      src={`http://localhost:8080/public/${item.image}`}
                       height={"350px"}
                       className="image"
                     />

@@ -80,7 +80,7 @@ function UserRegister() {
             <input required
               name="email"
               value={data.email}
-              type="text"
+              type="email"
               class="form-control"
               id="floatingInput"
               placeholder="name@example.com"
@@ -93,6 +93,9 @@ function UserRegister() {
               name="mobile"
               value={data.mobile}
               type="text"
+              pattern="\d*"
+              minLength={"10"}
+              maxLength={"10"}
               class="form-control"
               id="floatingInput"
               placeholder="name@example.com"

@@ -14,7 +14,8 @@ const cart = new schema(
         cartQuantity:{type:Number,required:true},
         total:{type:String,required:true},
         status:String
-    }
+    },
+    { timestamps: true }
 )
 
 module.exports = mongoose.model("cart",cart)

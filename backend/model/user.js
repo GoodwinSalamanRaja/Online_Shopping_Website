@@ -9,7 +9,8 @@ const user = new schema(
         mobile:{type:String,required:true},
         otp:String,
         expiryTime:Date
-    }
+    },
+    { timestamps: true }
 )
 
 module.exports = mongoose.model("users",user)
