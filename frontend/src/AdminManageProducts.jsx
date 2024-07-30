@@ -314,7 +314,7 @@ function AdminManageProducts() {
                     </option>
                     {Array.isArray(subCategories) &&
                       subCategories.map((data) => (
-                        <option key={data._id}>{data.name}</option>
+                        <option key={data._id} value={data.name}>{data.name}</option>
                       ))}
                   </select>
                   <p className="text-danger m-1">{error.subCategory}</p>

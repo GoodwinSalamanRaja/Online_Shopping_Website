@@ -147,7 +147,6 @@ function HomePage({length}) {
                 height:'100vh',
                 overflowY:"auto"
               }}
-              className="custom-scroll"
             >
               <div>
                 <h4 className="fw-bold text-center p-2">Categories</h4>

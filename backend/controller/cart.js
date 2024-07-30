@@ -206,7 +206,7 @@ exports.updateStatus = (req, res) => {
 exports.list = (req, res) => {
   carts
     .find()
-    .populate("userId")
+    .populate("userId").sort({createdAt:"desc"})
     .then((data) => {
       console.log(data);
       res.status(200).send(data);
