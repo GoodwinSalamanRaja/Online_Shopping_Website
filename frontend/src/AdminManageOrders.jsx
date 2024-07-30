@@ -43,7 +43,7 @@ function AdminManageOrders() {
       )
       .then((response) => {
         console.log(response.data);
-        setProducts(response.data.reverse());
+        setProducts(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -92,6 +92,9 @@ function AdminManageOrders() {
                     Price
                   </th>
                   <th scope="col" className="border border-2 text-nowrap">
+                    Total Quantity
+                  </th>
+                  <th scope="col" className="border border-2 text-nowrap">
                     Quantity
                   </th>
                   <th scope="col" className="border border-2 text-nowrap">
@@ -113,6 +116,7 @@ function AdminManageOrders() {
                 </tr>
               </thead>
               <tbody className="border border-2">
+                {console.log(products,"pro")}
                 {Array.isArray(products) &&
                   products.map((data, i) => (
                     <tr className="border border-2 text-center" key={data._id}>
@@ -137,6 +141,9 @@ function AdminManageOrders() {
                       </td>
                       <td className="border border-2 text-center">
                         {data.price}
+                      </td>
+                      <td className="border border-2 text-center">
+                        {data.productId.quantity}
                       </td>
                       <td className="border border-2 text-center">
                         {data.cartQuantity}

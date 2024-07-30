@@ -206,7 +206,7 @@ exports.updateStatus = (req, res) => {
 exports.list = (req, res) => {
   carts
     .find()
-    .populate("userId").sort({createdAt:"desc"})
+    .populate('productId userId').sort({createdAt:"desc"})
     .then((data) => {
       console.log(data);
       res.status(200).send(data);
@@ -219,8 +219,7 @@ exports.list = (req, res) => {
 exports.search = async (req, res) => {
   if (req.params.name === " ") {
     carts
-      .find()
-      .populate("userId")
+      .find().populate('productId userId').sort({createdAt:"desc"})
       .then((data) => {
         console.log(data);
         res.status(200).send(data);
@@ -247,7 +246,7 @@ exports.search = async (req, res) => {
             // { "userId.username": { $regex: name } }
           ],
         })
-        .populate("userId")
+        .populate('productId userId').sort({createdAt:"desc"})
         .then((data) => {
           console.log(data);
           res.status(200).send(data);
@@ -259,7 +258,7 @@ exports.search = async (req, res) => {
       console.log("search");
       carts
         .find()
-        .populate("userId")
+        .populate('productId userId').sort({createdAt:"desc"})
         .then((data) => {
           // console.log(data,"search");
           let filteredUsername = data.filter(

@@ -9,7 +9,7 @@ const cart = new schema(
         price:{type:String,required:true},
         description:{type:String,required:true},
         image:{type:String,required:true},
-        productId:{type:mongoose.Schema.ObjectId,required:true},
+        productId:{type:mongoose.Schema.Types.ObjectId,required:true,ref:'products'},
         userId:{type:mongoose.Schema.Types.ObjectId,required:true,ref:'users'},
         cartQuantity:{type:Number,required:true},
         total:{type:String,required:true},

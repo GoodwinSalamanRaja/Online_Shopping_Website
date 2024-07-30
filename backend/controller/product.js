@@ -42,7 +42,7 @@ exports.insert = (req, res) => {
 
 exports.list = (req, res) => {
   products
-    .find()
+    .find().sort({createdAt:"desc"})
     .then((products) => {
       res.status(200).send(products);
     })
