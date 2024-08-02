@@ -1,0 +1,12 @@
+.sidebar {
+  width: 14rem;
+  position: fixed;
+  top: 14%;
+  background-color: rgb(208, 209, 211);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}

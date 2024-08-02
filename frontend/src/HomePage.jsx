@@ -6,6 +6,7 @@ import DynamicCategory from "./DynamicCategory";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useMemo } from "react";
+import './App.css';
 
 function HomePage({length}) {
   if(length){
@@ -36,6 +37,22 @@ function HomePage({length}) {
   useEffect(() => {
     setCount(length)
   },[length])
+
+  const [cartLength, setCartLength] = useState();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/cart/getById/${parsedData.userId}`, {
+        headers: { Authorization: parsedData.token },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setCartLength(response.data.length);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [parsedData.userId]);
 
   const [all, setAll] = useState(true);
 
@@ -131,23 +148,14 @@ function HomePage({length}) {
 
   return (
     <div>
-      {userData && <NavBar userData={userData} length={count}/>}
+      {userData && <NavBar userData={userData} length={count || cartLength}/>}
       <div
         className="container-fluid"
         style={{ backgroundColor: "rgb(208,209,211)" }}
       >
         <div className="row">
           <div className="col-2 p-0">
-            <div
-              style={{
-                width: "14rem",
-                position: "fixed",
-                top: "14%",
-                backgroundColor: "rgb(208,209,211)",
-                height:'100vh',
-                overflowY:"auto"
-              }}
-            >
+            <div className="sidebar">
               <div>
                 <h4 className="fw-bold text-center p-2">Categories</h4>
                 <ul class="list-group list-group-flush">

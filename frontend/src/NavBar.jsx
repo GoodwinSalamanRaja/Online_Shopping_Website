@@ -31,21 +31,21 @@ function NavBar({ userData,length}) {
 
   const parsedData = JSON.parse(storedData);
 
-  const [count, setCount] = useState();
+  // const [count, setCount] = useState();
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/cart/getById/${parsedData.userId}`, {
-        headers: { Authorization: parsedData.token },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setCount(response.data.length);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [parsedData.userId]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8080/cart/getById/${parsedData.userId}`, {
+  //       headers: { Authorization: parsedData.token },
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setCount(response.data.length);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     Happy birthday @Vivekanantha anne,@Sasi & @Yakeshwaran brother  });
+  // }, [parsedData.userId]);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -160,21 +160,21 @@ function NavBar({ userData,length}) {
               ></button>
             </Offcanvas.Header>
             <Offcanvas.Body className="d-flex flex-column flex-lg-row justify-content-lg-end gap-4">
-              <Nav className="gap-4 d-flex align-items-center">
+              <Nav className="gap-4 d-flex align-items-center ">
                 <Nav.Link className="text-white" href="/home">
                   Home
                 </Nav.Link>
                 <Nav.Link className="text-white" href="/cart">
                   <button
                     type="button"
-                    class="btn btn-transparent position-relative"
+                    class="btn btn-transparent position-relative text-white"
                   >
                     Cart
                     <span
                       style={{ top: "25%" }}
                       class="position-absolute start-100 translate-middle badge rounded-pill bg-danger"
                     >
-                      {length || count}
+                      {length}
                     </span>
                   </button>
                 </Nav.Link>

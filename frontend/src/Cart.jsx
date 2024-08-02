@@ -83,7 +83,7 @@ function Cart({ length }) {
         headers: { Authorization: parsedData.token },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data,"data");
         setProducts(response.data);
       })
       .catch((error) => {
@@ -329,7 +329,7 @@ function Cart({ length }) {
                 left: "0",
                 width: "100%",
                 height: "100%",
-                backgroundColor: "rgba(0,0,0,0.5)",
+                backgroundColor: "rgba(0,0,0,0.5)" ,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
